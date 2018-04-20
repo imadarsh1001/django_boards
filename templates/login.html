@@ -13,6 +13,12 @@
             {% include 'includes/form.html' %}
             <button type="submit" class="btn btn-primary btn-block">Log in</button>
           </form>
+        <div class="mt-2">
+          <a href="{% url 'social:begin' 'github' %}"><button type="submit" class="btn btn-primary btn-block">Github</button></a>
+        </div>
+        <div class="mt-2">
+          <a href="{% url 'social:begin' 'google-oauth2' %}"><button type="submit" class="btn btn-primary btn-outline-warning btn-block">Google+</button></a>
+        </div>
         </div>
         <div class="card-footer text-muted text-center">
           New to Django Boards? <a href="{% url 'signup' %}">Sign up</a>

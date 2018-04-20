@@ -12,6 +12,7 @@ def signup(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             user = form.save()
+
             auth_login(request, user)
             return redirect('home')
     else:
@@ -22,7 +23,7 @@ def signup(request):
 @method_decorator(login_required, name='dispatch')
 class UserUpdateView(UpdateView):
     model = User
-    fields = ('first_name', 'last_name', 'email', )
+    fields = ('first_name', 'last_name', 'email','' )
     template_name = 'my_account.html'
     success_url = reverse_lazy('my_account')
 

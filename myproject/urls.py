@@ -18,14 +18,15 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from accounts import views as accounts_views
 from boards import views 
-
+from django.conf.urls import include
 
 
 urlpatterns = [
     url(r'^$', views.home, name='home'),
     url(r'^signup/$', accounts_views.signup, name='signup'),
     url(r'^login/$', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
-     url(r'^settings/account/$', accounts_views.UserUpdateView.as_view(), name='my_account'),
+    url(r'^oauth/', include('social_django.urls', namespace='social')), 
+    url(r'^settings/account/$', accounts_views.UserUpdateView.as_view(), name='my_account'),
     url(r'^reset/$',auth_views.PasswordResetView.as_view(
         template_name='password_reset.html',
         email_template_name='password_reset_email.html',
@@ -51,4 +52,5 @@ urlpatterns = [
     url(r'^boards/(?P<pk>\d+)/topics/(?P<topic_pk>\d+)/posts/(?P<post_pk>\d+)/edit/$',
         views.PostUpdateView.as_view(), name='edit_post'),
     url(r'^admin/', admin.site.urls),
+    url(r'^contact/', include('envelope.urls')),
 ]
